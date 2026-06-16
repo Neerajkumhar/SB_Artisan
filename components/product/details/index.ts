@@ -1,0 +1,11 @@
+export { default as ImageLightbox } from "./image-lightbox";
+export { default as ProductGallery } from "./product-gallery";
+export { default as ProductOverview } from "./product-overview";
+export { default as MaterialsSection } from "./materials-section";
+export { default as DimensionsTable } from "./dimensions-table";
+export { default as FinishSelector } from "./finish-selector";
+export { default as CraftsmanshipStory } from "./craftsmanship-story";
+export { default as HospitalityUsage } from "./hospitality-usage";
+export { default as RelatedProducts } from "./related-products";
+export { default as InquirySidebar } from "./inquiry-sidebar";
+export { default as StickyActions } from "./sticky-actions";
