@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 import IconButton from "../ui/IconButton";
@@ -17,6 +18,7 @@ export interface SearchButtonProps {
  * Smoothly transitions from a circular icon button to an active search bar.
  */
 export default function SearchButton({ className }: SearchButtonProps) {
+  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -50,8 +52,9 @@ export default function SearchButton({ className }: SearchButtonProps) {
 
   const handleToggle = () => {
     if (isExpanded && query.trim()) {
-      // Execute search query
-      console.log("Searching for:", query);
+      navigate(`/collections?search=${encodeURIComponent(query.trim())}`);
+      setIsExpanded(false);
+      setQuery("");
     } else {
       setIsExpanded(!isExpanded);
     }
@@ -59,8 +62,9 @@ export default function SearchButton({ className }: SearchButtonProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && query.trim()) {
-      console.log("Searching for:", query);
+      navigate(`/collections?search=${encodeURIComponent(query.trim())}`);
       setIsExpanded(false);
+      setQuery("");
     } else if (e.key === "Escape") {
       setIsExpanded(false);
     }

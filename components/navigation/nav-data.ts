@@ -134,8 +134,4 @@ export const NAVIGATION_DATA: NavItem[] = [
     label: "Contact Desk",
     href: "/contact",
   },
-  {
-    label: "Admin Panel",
-    href: "/admin",
-  },
 ];

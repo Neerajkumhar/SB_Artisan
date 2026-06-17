@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext, useSearchParams } from "react-router-dom";
 import { INDIAN_HOSPITALITY_PRODUCTS, fetchProducts, HospitalityProduct } from "../product";
 import ProductGrid from "../product/product-grid";
 import { Container, SectionTitle, SEO } from "../ui";
@@ -19,14 +19,38 @@ const FILTER_TABS = [
 export default function CollectionsPage() {
   const { category } = useParams<{ category?: string }>();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQueryParam = searchParams.get("search") || "";
   
   const [activeSlug, setActiveSlug] = useState<string>("all");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>(searchQueryParam);
   const [filteredProducts, setFilteredProducts] = useState<HospitalityProduct[]>([]);
   const [wishlistedIds, setWishlistedIds] = useState<string[]>(["ind-haveli-chair", "ind-shekhawati-bar"]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { openInquiry } = useOutletContext<{ openInquiry: (product: HospitalityProduct | null) => void }>();
+
+  // Synchronize searchQuery with search query param
+  useEffect(() => {
+    setSearchQuery(searchQueryParam);
+  }, [searchQueryParam]);
+
+  const handleSearchChange = (val: string) => {
+    setSearchQuery(val);
+    if (val) {
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        next.set("search", val);
+        return next;
+      });
+    } else {
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete("search");
+        return next;
+      });
+    }
+  };
 
   // Synchronize URL path with local filter tab state
   useEffect(() => {
@@ -138,13 +162,13 @@ export default function CollectionsPage() {
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search by wood, craft, name..."
               className="bg-transparent text-xs text-[#1A1A1A] placeholder:text-[#9E9B95] focus:outline-none w-full font-sans font-light"
             />
             {searchQuery && (
               <button 
-                onClick={() => setSearchQuery("")} 
+                onClick={() => handleSearchChange("")} 
                 className="text-[#8C8273] hover:text-[#1A1A1A] text-[9px] font-sans uppercase tracking-wider font-light"
               >
                 Clear
