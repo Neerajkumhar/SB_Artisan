@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
@@ -11,6 +11,14 @@ interface SidebarItem {
 export default function AdminLayout() {
   const location = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    return (localStorage.getItem("sbartisan_admin_theme") as "dark" | "light") || "dark";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sbartisan_admin_theme", theme);
+  }, [theme]);
+
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem("sbartisan_admin_authenticated") === "true";
   });
@@ -112,7 +120,7 @@ export default function AdminLayout() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#0B0A0A] text-[#EAE5D9] font-sans antialiased flex items-center justify-center p-6 selection:bg-[#CBB593] selection:text-[#0B0A0A]">
+      <div data-theme={theme} className="min-h-screen bg-[#0B0A0A] text-[#EAE5D9] font-sans antialiased flex items-center justify-center p-6 selection:bg-[#CBB593] selection:text-[#0B0A0A]">
         <div className="w-full max-w-md bg-[#121110] border border-[#23211F] p-8 space-y-8 shadow-2xl relative">
           {/* Decorative corner lines */}
           <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#CBB593]" />
@@ -191,7 +199,7 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0A0A] text-[#EAE5D9] font-sans antialiased flex flex-col lg:flex-row selection:bg-[#CBB593] selection:text-[#0B0A0A]">
+    <div data-theme={theme} className="min-h-screen bg-[#0B0A0A] text-[#EAE5D9] font-sans antialiased flex flex-col lg:flex-row selection:bg-[#CBB593] selection:text-[#0B0A0A]">
       
       {/* Mobile Top Header */}
       <header className="lg:hidden flex items-center justify-between p-4 bg-[#121110] border-b border-[#23211F] sticky top-0 z-30">
@@ -284,7 +292,7 @@ export default function AdminLayout() {
 
       {/* 2. MAIN CMS CHILD ROUTE SLOT */}
       <div className="flex-grow min-h-[calc(100vh-62px)] lg:min-h-screen overflow-y-auto">
-        <Outlet />
+        <Outlet context={{ theme, setTheme }} />
       </div>
 
     </div>

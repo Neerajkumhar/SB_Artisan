@@ -1,3 +1,155 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Admin Theme variables declaration */
+:root {
+  --admin-bg: #0B0A0A;
+  --admin-text-main: #EAE5D9;
+  --admin-text-bright: #ffffff;
+  --admin-text-subtle: #8C8273;
+  --admin-text-brand: #CBB593;
+  --admin-bg-panel: #121110;
+  --admin-bg-input: #1E1D1C;
+  --admin-border: #23211F;
+  --admin-border-focus: #CBB593;
+  --admin-accent-hover: #1E1D1C;
+  --admin-brand-hover: #DDC9AC;
+  --admin-brand-bg-subtle: rgba(203, 181, 147, 0.1);
+  --admin-danger: #f87171;
+  --admin-danger-bg-subtle: rgba(127, 29, 29, 0.15);
+  --admin-chart-gradient-stop: rgba(203, 181, 147, 0.12);
+}
+
+[data-theme='light'] {
+  --admin-bg: #FAF9F5;
+  --admin-text-main: #2D2A26;
+  --admin-text-bright: #121110;
+  --admin-text-subtle: #7A7265;
+  --admin-text-brand: #9E8561;
+  --admin-bg-panel: #ffffff;
+  --admin-bg-input: #F4F3ED;
+  --admin-border: #EAE5D9;
+  --admin-border-focus: #9E8561;
+  --admin-accent-hover: #F4F3ED;
+  --admin-brand-hover: #8C724C;
+  --admin-brand-bg-subtle: rgba(158, 133, 97, 0.1);
+  --admin-danger: #dc2626;
+  --admin-danger-bg-subtle: rgba(220, 38, 38, 0.08);
+  --admin-chart-gradient-stop: rgba(158, 133, 97, 0.12);
+}
+
+/* Base style mapping when light theme is active */
+[data-theme='light'].bg-\[\#0B0A0A\],
+[data-theme='light'] .bg-\[\#0B0A0A\] {
+  background-color: var(--admin-bg) !important;
+}
+[data-theme='light'].text-\[\#EAE5D9\],
+[data-theme='light'] .text-\[\#EAE5D9\] {
+  color: var(--admin-text-main) !important;
+}
+[data-theme='light'] .bg-\[\#121110\] {
+  background-color: var(--admin-bg-panel) !important;
+}
+[data-theme='light'] .border-\[\#23211F\] {
+  border-color: var(--admin-border) !important;
+}
+[data-theme='light'] .bg-\[\#1E1D1C\] {
+  background-color: var(--admin-bg-input) !important;
+}
+[data-theme='light'] .border-\[\#2C2B29\] {
+  border-color: var(--admin-border) !important;
+}
+[data-theme='light'] .text-white {
+  color: var(--admin-text-bright) !important;
+}
+[data-theme='light'] .text-\[\#8C8273\] {
+  color: var(--admin-text-subtle) !important;
+}
+[data-theme='light'] .text-\[\#CBB593\] {
+  color: var(--admin-text-brand) !important;
+}
+[data-theme='light'] .border-\[\#CBB593\] {
+  border-color: var(--admin-text-brand) !important;
+}
+[data-theme='light'] .bg-\[\#CBB593\] {
+  background-color: var(--admin-text-brand) !important;
+  color: var(--admin-bg-panel) !important;
+}
+[data-theme='light'] .hover\:bg-\[\#DDC9AC\]:hover {
+  background-color: var(--admin-brand-hover) !important;
+}
+[data-theme='light'] .bg-\[\#181716\] {
+  background-color: var(--admin-bg-input) !important;
+}
+[data-theme='light'] .bg-\[\#181716\]\/40 {
+  background-color: rgba(244, 243, 237, 0.4) !important;
+}
+[data-theme='light'] .border-\[\#23211F\]\/30 {
+  border-color: rgba(234, 229, 217, 0.4) !important;
+}
+[data-theme='light'] .border-\[\#23211F\]\/20 {
+  border-color: rgba(234, 229, 217, 0.3) !important;
+}
+[data-theme='light'] .border-\[\#23211F\]\/60 {
+  border-color: rgba(234, 229, 217, 0.6) !important;
+}
+[data-theme='light'] .divide-\[\#23211F\]\/30 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(234, 229, 217, 0.4) !important;
+}
+[data-theme='light'] .text-\[\#DDC9AC\] {
+  color: var(--admin-text-subtle) !important;
+}
+[data-theme='light'] .text-red-400 {
+  color: var(--admin-danger) !important;
+}
+[data-theme='light'] .bg-red-950\/15 {
+  background-color: var(--admin-danger-bg-subtle) !important;
+}
+[data-theme='light'] .border-red-950\/20 {
+  border-color: rgba(220, 38, 38, 0.2) !important;
+}
+[data-theme='light'] .hover\:border-red-900\/40:hover {
+  border-color: rgba(220, 38, 38, 0.4) !important;
+}
+[data-theme='light'] .focus\:border-\[\#CBB593\]:focus {
+  border-color: var(--admin-border-focus) !important;
+}
+[data-theme='light'] .hover\:bg-\[\#1E1D1C\]\/60:hover {
+  background-color: rgba(244, 243, 237, 0.6) !important;
+}
+[data-theme='light'] .bg-\[\#1E1D1C\]\/60 {
+  background-color: rgba(244, 243, 237, 0.6) !important;
+}
+[data-theme='light'].selection\:bg-\[\#CBB593\]::selection,
+[data-theme='light'] .selection\:bg-\[\#CBB593\]::selection {
+  background-color: var(--admin-text-brand) !important;
+  color: var(--admin-bg-panel) !important;
+}
+[data-theme='light'].selection\:text-\[\#0B0A0A\]::selection,
+[data-theme='light'] .selection\:text-\[\#0B0A0A\]::selection {
+  color: var(--admin-bg) !important;
+}
+[data-theme='light'] .bg-\[\#CBB593\]\/10 {
+  background-color: var(--admin-brand-bg-subtle) !important;
+}
+[data-theme='light'] .border-\[\#CBB593\]\/20 {
+  border-color: rgba(158, 133, 97, 0.2) !important;
+}
+[data-theme='light'] .hover\:border-\[\#CBB593\]\/40:hover {
+  border-color: rgba(158, 133, 97, 0.4) !important;
+}
+[data-theme='light'] .placeholder\:text-\[\#6E6B64\]::placeholder {
+  color: #a19c92 !important;
+}
+
+/* Admin Dashboard Table hover rules */
+[data-theme='light'] .hover\:bg-\[\#181716\]\/20:hover {
+  background-color: rgba(244, 243, 237, 0.5) !important;
+}
+
+/* Dropdown/Input styling specific overrides */
+[data-theme='light'] input, [data-theme='light'] select, [data-theme='light'] textarea {
+  color: var(--admin-text-bright) !important;
+  background-color: var(--admin-bg-input) !important;
+}

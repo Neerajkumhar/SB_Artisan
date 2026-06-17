@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { motion } from "framer-motion";
 import { INDIAN_HOSPITALITY_PRODUCTS, getUniqueCategories } from "../product";
 
@@ -15,6 +15,7 @@ interface InquiryRecord {
 }
 
 export default function AdminDashboardPage() {
+  const { theme, setTheme } = useOutletContext<{ theme: "dark" | "light"; setTheme: (t: "dark" | "light") => void }>();
   const [inquiries, setInquiries] = useState<InquiryRecord[]>([]);
   const [productsList, setProductsList] = useState<any[]>([]);
   const [categoriesList, setCategoriesList] = useState<any[]>([]);
@@ -149,6 +150,32 @@ export default function AdminDashboardPage() {
 
         {/* Quick actions panel */}
         <div className="flex flex-wrap items-center gap-3">
+          {/* Theme Selector Toggle */}
+          <div className="flex items-center border border-[#2C2B29] bg-[#1E1D1C] p-0.5 select-none rounded-none">
+            <button
+              onClick={() => setTheme("dark")}
+              type="button"
+              className={`px-3.5 py-1.5 text-[9px] uppercase tracking-[0.15em] font-sans font-medium transition-all duration-300 cursor-pointer border-none focus:outline-none ${
+                theme === "dark"
+                  ? "bg-[#CBB593] text-[#0B0A0A]"
+                  : "bg-transparent text-[#8C8273] hover:text-white"
+              }`}
+            >
+              Dark
+            </button>
+            <button
+              onClick={() => setTheme("light")}
+              type="button"
+              className={`px-3.5 py-1.5 text-[9px] uppercase tracking-[0.15em] font-sans font-medium transition-all duration-300 cursor-pointer border-none focus:outline-none ${
+                theme === "light"
+                  ? "bg-[#CBB593] text-[#0B0A0A]"
+                  : "bg-transparent text-[#8C8273] hover:text-white"
+              }`}
+            >
+              Light
+            </button>
+          </div>
+
           <Link
             to="/admin/products"
             className="py-2.5 px-4 bg-[#1E1D1C] hover:bg-[#2C2B29] border border-[#2C2B29] text-white text-[9px] uppercase tracking-[0.2em] font-sans font-medium transition-all duration-300 rounded-none text-center"
@@ -232,14 +259,14 @@ export default function AdminDashboardPage() {
           <svg className="w-full h-32 mt-4 z-10" viewBox="0 0 600 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="chart-grad-panel" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#CBB593" stopOpacity="0.12" />
-                <stop offset="100%" stopColor="#CBB593" stopOpacity="0.0" />
+                <stop offset="0%" stopColor="var(--admin-text-brand)" stopOpacity="0.12" />
+                <stop offset="100%" stopColor="var(--admin-text-brand)" stopOpacity="0.0" />
               </linearGradient>
             </defs>
             <path d="M10 110 C 100 80, 200 95, 300 50 C 400 20, 500 45, 590 10 L 590 120 L 10 120 Z" fill="url(#chart-grad-panel)" />
-            <path d="M10 110 C 100 80, 200 95, 300 50 C 400 20, 500 45, 590 10" stroke="#CBB593" strokeWidth="1.25" strokeLinecap="round" />
-            <circle cx="300" cy="50" r="4" fill="#0B0A0A" stroke="#CBB593" strokeWidth="1.25" />
-            <circle cx="590" cy="10" r="4" fill="#0B0A0A" stroke="#CBB593" strokeWidth="1.25" />
+            <path d="M10 110 C 100 80, 200 95, 300 50 C 400 20, 500 45, 590 10" stroke="var(--admin-text-brand)" strokeWidth="1.25" strokeLinecap="round" />
+            <circle cx="300" cy="50" r="4" fill="var(--admin-bg)" stroke="var(--admin-text-brand)" strokeWidth="1.25" />
+            <circle cx="590" cy="10" r="4" fill="var(--admin-bg)" stroke="var(--admin-text-brand)" strokeWidth="1.25" />
           </svg>
 
           <div className="flex justify-between text-[9px] text-[#8C8273] uppercase tracking-wider px-2 z-10">
